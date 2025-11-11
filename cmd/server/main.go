@@ -86,6 +86,9 @@ func main() {
 	app := setupApplication(cfg)
 
 	// Start server
+	// Serve static files (for QR code, CSS, JS, etc.)
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("templates/static"))))
+
 	startServer(app)
 
 	// Wait for shutdown signal
